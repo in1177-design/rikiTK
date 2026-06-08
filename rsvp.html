@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>בת מצווה של ריקי 🌊</title>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+
+    body {
+      font-family: 'Assistant', sans-serif;
+      min-height: 100vh;
+      color: #fff;
+      position: relative;
+    }
+
+    /* תמונת רקע קבועה */
+    .bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: url('bg.jpg') center top / cover no-repeat;
+    }
+    .bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.25) 60%, rgba(0,0,0,0.4) 100%);
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 16px 24px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* כותרת קטנה בראש */
+    .header {
+      text-align: center;
+      padding: 28px 0 0;
+      flex-shrink: 0;
+    }
+    .header h1 {
+      font-size: 1.9rem;
+      font-weight: 900;
+      color: #fff;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+      line-height: 1.1;
+    }
+    .header h1 span {
+      display: block;
+      font-size: 1.3rem;
+      color: #f8bbd0;
+    }
+
+    /* spacer גדול – מציג את התמונה */
+    .spacer { flex: 1; min-height: 120px; }
+
+    /* פרטי אירוע */
+    .event-details {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .detail {
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1.5px solid rgba(255,255,255,0.4);
+      border-radius: 20px;
+      padding: 5px 13px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    /* ── Card זכוכית ── */
+    .card {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1.5px solid rgba(255,255,255,0.35);
+      border-radius: 22px;
+      padding: 18px 16px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+    }
+
+    .card h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 14px;
+      text-align: center;
+    }
+
+    /* ── Form ── */
+    .form-group { margin-bottom: 10px; }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 4px;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.9);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1px solid rgba(255,255,255,0.5);
+      border-radius: 10px;
+      font-size: 0.92rem;
+      font-family: inherit;
+      color: #1a1a2e;
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.6); }
+    select option { color: #1a1a2e; background: white; }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.25);
+    }
+    textarea { resize: vertical; min-height: 52px; }
+
+    .row { display: flex; gap: 8px; }
+    .row .form-group { flex: 1; }
+
+    .toggle-group { display: flex; gap: 6px; }
+    .toggle {
+      flex: 1;
+      padding: 9px 12px;
+      border: 1px solid rgba(255,255,255,0.5);
+      border-radius: 10px;
+      background: rgba(255,255,255,0.18);
+      color: #1a1a2e;
+      font-family: 'Assistant', sans-serif;
+      font-size: 0.92rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .toggle.active {
+      background: rgba(255,255,255,0.9);
+      color: #1a1a2e;
+      border-color: white;
+      font-weight: 600;
+    }
+
+    /* ── Button ── */
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.15rem;
+      font-weight: 300;
+      letter-spacing: 3px;
+      cursor: pointer;
+      font-family: 'Assistant', sans-serif;
+      background: linear-gradient(135deg, #f06292, #e91e63);
+      color: white;
+      box-shadow: 0 4px 18px rgba(233,30,99,0.45);
+      transition: opacity 0.2s, transform 0.1s;
+      margin-top: 4px;
+    }
+    .btn:hover { opacity: 0.92; }
+    .btn:active { transform: scale(0.98); }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    /* ── Messages ── */
+    .msg {
+      display: none;
+      margin-top: 14px;
+      padding: 13px 16px;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .msg.success { background: rgba(255,255,255,0.9); color: #c2185b; border: 2px solid #f48fb1; }
+    .msg.error   { background: rgba(255,255,255,0.9); color: #b71c1c; border: 2px solid #ef9a9a; }
+
+    .spinner {
+      display: none;
+      width: 18px; height: 18px;
+      border: 3px solid rgba(255,255,255,0.4);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin: 0 auto;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .footer {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.55);
+    }
+  </style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="page">
+
+  <div class="header">
+    <h1>בת מצווה<span>של ריקי ✨</span></h1>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="event-details">
+    <div class="detail">📍 בריכת שילר</div>
+    <div class="detail">📅 1.8.2026</div>
+    <div class="detail">🕕 18:00</div>
+  </div>
+
+  <div class="card">
+    <h2>💌 אשרו את הגעתכם</h2>
+    <form id="form">
+
+      <div class="form-group">
+        <label>שם מלא *</label>
+        <input type="text" id="name" placeholder="שם ושם משפחה" required />
+      </div>
+
+      <div class="row">
+        <div class="form-group">
+          <label>מגיע/ה?</label>
+          <div class="toggle-group">
+            <button type="button" class="toggle active" data-value="כן" onclick="selectAttending(this)">כן</button>
+            <button type="button" class="toggle" data-value="לא" onclick="selectAttending(this)">לא</button>
+            <button type="button" class="toggle" data-value="אולי" onclick="selectAttending(this)">אולי</button>
+          </div>
+          <input type="hidden" id="attending" value="כן" />
+        </div>
+        <div class="form-group">
+          <label>כמה אנשים?</label>
+          <select id="count">
+            <option value="1">1 אדם</option>
+            <option value="2">2 אנשים</option>
+            <option value="3">3 אנשים</option>
+            <option value="4">4 אנשים</option>
+            <option value="5">5 אנשים</option>
+            <option value="6">6 אנשים</option>
+            <option value="7">7 אנשים</option>
+            <option value="8">8 אנשים</option>
+            <option value="9">9 אנשים</option>
+            <option value="10">10 אנשים</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>טלפון</label>
+        <input type="tel" id="phone" placeholder="050-0000000" />
+      </div>
+
+
+      <button type="submit" class="btn" id="submitBtn">
+        <span id="btnText">שלח אישור</span>
+        <div class="spinner" id="spinner"></div>
+      </button>
+
+      <div class="msg success" id="successMsg">
+        🎉 תודה! האישור נרשם!<br>
+        <small>מחכים לראותך 🌊💕</small>
+      </div>
+      <div class="msg error" id="errorMsg">
+        ❌ שגיאה בשליחה. נסה שוב.
+      </div>
+
+    </form>
+  </div>
+
+  <div class="footer">מסיבת בריכה • בת מצווה של ריקי • 2026</div>
+
+</div>
+
+<script>
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxXVX4M5eHao7Lfq7qoJMe0chFAEnw0WlSNpsdgZz8RypJgnrGw-O9w-dC12yHFGGbsAg/exec';
+
+  function selectAttending(btn) {
+    document.querySelectorAll('.toggle').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('attending').value = btn.dataset.value;
+    document.getElementById('count').disabled = btn.dataset.value === 'לא';
+  }
+
+  document.getElementById('form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
+    const spinner = document.getElementById('spinner');
+
+    btn.disabled = true;
+    btnText.style.display = 'none';
+    spinner.style.display = 'block';
+    document.getElementById('successMsg').style.display = 'none';
+    document.getElementById('errorMsg').style.display = 'none';
+
+    const data = {
+      name:      document.getElementById('name').value.trim(),
+      attending: document.getElementById('attending').value,
+      count:     document.getElementById('count').value,
+      phone:     document.getElementById('phone').value.trim(),
+      notes:     document.getElementById('notes').value.trim(),
+    };
+
+    try {
+      await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(data) });
+      document.getElementById('successMsg').style.display = 'block';
+      this.reset();
+      document.getElementById('count').value = 1;
+    } catch {
+      document.getElementById('errorMsg').style.display = 'block';
+    } finally {
+      btnText.style.display = 'block';
+      spinner.style.display = 'none';
+      btn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
