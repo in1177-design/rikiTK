@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>בת מצווה של ריקי 🌊</title>
-  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400&family=Frank+Ruhl+Libre:wght@300&family=Varela+Round&display=swap" rel="stylesheet" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; }
@@ -47,18 +47,38 @@
       text-align: center;
       padding: 28px 0 0;
       flex-shrink: 0;
+      margin-top: 120px;
+    }
+    .header .invite-small {
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.4);
     }
     .header h1 {
-      font-size: 1.9rem;
-      font-weight: 900;
-      color: #fff;
-      text-shadow: 0 2px 20px rgba(0,0,0,0.5);
-      line-height: 1.1;
-    }
-    .header h1 span {
-      display: block;
-      font-size: 1.3rem;
+      font-size: 3rem;
+      font-weight: 700;
       color: #f8bbd0;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+    .header .script {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-weight: 300;
+      font-size: 2.8rem;
+      font-style: italic;
+      color: #fff;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+      display: block;
+    }
+    .header .heart {
+      font-size: 1.4rem;
+      color: #f8bbd0;
+      margin-top: 6px;
+      display: block;
     }
 
     /* spacer גדול – מציג את התמונה */
@@ -67,21 +87,17 @@
     /* פרטי אירוע */
     .event-details {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
       gap: 6px;
-      flex-wrap: wrap;
-      margin-bottom: 10px;
+      margin-bottom: 14px;
     }
     .detail {
-      background: rgba(255,255,255,0.2);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1.5px solid rgba(255,255,255,0.4);
-      border-radius: 20px;
-      padding: 5px 13px;
-      font-size: 0.82rem;
-      font-weight: 700;
+      font-family: 'Varela Round', sans-serif;
+      font-size: 1.2rem;
       color: #fff;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.3);
+      letter-spacing: 1px;
     }
 
     /* ── Card זכוכית ── */
@@ -111,7 +127,7 @@
       font-weight: 600;
       margin-bottom: 4px;
       font-size: 0.8rem;
-      color: rgba(255,255,255,0.9);
+      color: #1a1a1a;
     }
 
     input, select, textarea {
@@ -127,7 +143,7 @@
       -webkit-backdrop-filter: blur(8px);
       transition: border-color 0.2s, background 0.2s;
     }
-    input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.6); }
+    input::placeholder, textarea::placeholder { color: #4E6368; }
     select option { color: #1a1a2e; background: white; }
     input:focus, select:focus, textarea:focus {
       outline: none;
@@ -218,15 +234,16 @@
 <div class="page">
 
   <div class="header">
-    <h1>בת מצווה<span>של ריקי ✨</span></h1>
+    <p class="invite-small">אנחנו מזמינים אתכם</p>
+    <h1>למסיבת בריכה</h1>
+    <span class="script">בת מצווה</span>
+    <span class="heart">♡</span>
   </div>
 
   <div class="spacer"></div>
 
   <div class="event-details">
-    <div class="detail">📍 בריכת שילר</div>
-    <div class="detail">📅 1.8.2026</div>
-    <div class="detail">🕕 18:00</div>
+    <div class="detail">1.8.2026 &nbsp;|&nbsp; 18:00 &nbsp;|&nbsp; בריכת שילר</div>
   </div>
 
   <div class="card">
