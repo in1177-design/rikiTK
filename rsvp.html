@@ -138,13 +138,12 @@
       font-size: 0.92rem;
       font-family: inherit;
       color: #1a1a2e;
-      background: rgba(255,255,255,0.18);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background: #E3D3D6;
       transition: border-color 0.2s, background 0.2s;
     }
     input::placeholder, textarea::placeholder { color: #4E6368; }
     select option { color: #1a1a2e; background: white; }
+    select { position: relative; z-index: 99; }
     input:focus, select:focus, textarea:focus {
       outline: none;
       border-color: rgba(255,255,255,0.9);
@@ -161,7 +160,7 @@
       padding: 9px 12px;
       border: 1px solid rgba(255,255,255,0.5);
       border-radius: 10px;
-      background: rgba(255,255,255,0.18);
+      background: #E3D3D6;
       color: #1a1a2e;
       font-family: 'Assistant', sans-serif;
       font-size: 0.92rem;
@@ -339,7 +338,7 @@
     };
 
     try {
-      await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(data) });
+      await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(data), mode: 'no-cors' });
       document.getElementById('successMsg').style.display = 'block';
       this.reset();
       document.getElementById('count').value = 1;
