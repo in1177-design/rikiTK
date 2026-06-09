@@ -226,6 +226,25 @@
       font-size: 0.78rem;
       color: rgba(255,255,255,0.55);
     }
+
+    /* מסך תודה */
+    .thank-emoji { font-size: 2.5rem; margin-bottom: 10px; }
+    .thank-title { font-size: 1.4rem; color: #fff; margin-bottom: 10px; }
+    .thank-text  { font-size: 1rem; color: rgba(255,255,255,0.85); line-height: 1.6; margin-bottom: 8px; }
+    .thank-date  { font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-bottom: 18px; font-family: 'Varela Round', sans-serif; }
+    .btn-cal {
+      display: block;
+      padding: 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.4);
+      color: #fff;
+      font-family: 'Assistant', sans-serif;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-cal:hover { background: rgba(255,255,255,0.3); }
   </style>
 </head>
 <body>
@@ -245,7 +264,8 @@
     <div class="detail">1.8.2026 &nbsp;|&nbsp; 18:00 &nbsp;|&nbsp; בריכת שילר</div>
   </div>
 
-  <div class="card">
+  <!-- טופס -->
+  <div class="card" id="formCard">
     <h2>💌 אשרו את הגעתכם</h2>
     <form id="form">
 
@@ -286,21 +306,27 @@
         <input type="tel" id="phone" placeholder="050-0000000" />
       </div>
 
-
       <button type="submit" class="btn" id="submitBtn">
         <span id="btnText">שלח אישור</span>
         <div class="spinner" id="spinner"></div>
       </button>
 
-      <div class="msg success" id="successMsg">
-        🎉 תודה! האישור נרשם!<br>
-        <small>מחכים לראותך 🌊💕</small>
-      </div>
-      <div class="msg error" id="errorMsg">
-        ❌ שגיאה בשליחה. נסה שוב.
-      </div>
+      <div class="msg error" id="errorMsg">שגיאה בשליחה. נסה שוב.</div>
 
     </form>
+  </div>
+
+  <!-- מסך תודה -->
+  <div class="card" id="thankCard" style="display:none; text-align:center;">
+    <div class="thank-emoji">🌊</div>
+    <h2 class="thank-title">תודה שאישרתם!</h2>
+    <p class="thank-text">נשמח לראותכם<br>במסיבת הבריכה של ריקי</p>
+    <p class="thank-date">1.8.2026 | 18:00 | בריכת שילר</p>
+    <a class="btn btn-cal"
+       href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=בת+מצווה+של+ריקי&dates=20260801T180000/20260801T220000&location=בריכת+שילר&details=מסיבת+בריכה+בת+מצווה+של+ריקי"
+       target="_blank">
+      הוסף ליומן 📅
+    </a>
   </div>
 
   <div class="footer">מסיבת בריכה • בת מצווה של ריקי • 2026</div>
@@ -334,17 +360,15 @@
       attending: document.getElementById('attending').value,
       count:     document.getElementById('count').value,
       phone:     document.getElementById('phone').value.trim(),
-      notes:     document.getElementById('notes').value.trim(),
     };
 
     try {
       await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(data), mode: 'no-cors' });
-      document.getElementById('successMsg').style.display = 'block';
-      this.reset();
-      document.getElementById('count').value = 1;
+      // הסתר טופס, הצג תודה
+      document.getElementById('formCard').style.display = 'none';
+      document.getElementById('thankCard').style.display = 'block';
     } catch {
       document.getElementById('errorMsg').style.display = 'block';
-    } finally {
       btnText.style.display = 'block';
       spinner.style.display = 'none';
       btn.disabled = false;
