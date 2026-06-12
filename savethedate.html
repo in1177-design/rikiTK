@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Save the Date – בת מצווה של ריקי</title>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400&family=Frank+Ruhl+Libre:wght@300&family=Varela+Round&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+
+    body {
+      font-family: 'Assistant', sans-serif;
+      min-height: 100vh;
+      background: #2a1a2e;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* חצי עליון – תמונה */
+    .img-half {
+      width: 100vw;
+      height: 50vh;
+      flex-shrink: 0;
+      background: url('bg2.jpg') center top / 100% auto no-repeat;
+    }
+
+    /* חצי תחתון – רקע אחיד */
+    .content {
+      width: 100%;
+      max-width: 480px;
+      flex: 1;
+      background: #2a1a2e;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 20px 36px;
+      gap: 20px;
+    }
+
+    /* טקסט */
+    .std-label {
+      font-family: 'Assistant', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 300;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      text-align: center;
+    }
+    .std-line {
+      width: 50px;
+      height: 1px;
+      background: rgba(255,255,255,0.25);
+      margin: 4px auto;
+    }
+    .std-name {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: 3.5rem;
+      color: #f8bbd0;
+      text-align: center;
+      letter-spacing: 2px;
+      line-height: 1;
+    }
+
+    /* פרטים */
+    .detail {
+      font-family: 'Varela Round', sans-serif;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 1px;
+      text-align: center;
+    }
+
+    /* כפתור */
+    .btn-cal {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #d4e84a, #b5cc1e);
+      border: none;
+      color: #1a1a1a;
+      font-family: 'Assistant', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      letter-spacing: 3px;
+      text-decoration: none;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 4px 18px rgba(233,30,99,0.4);
+      transition: opacity 0.2s, transform 0.1s;
+    }
+    .btn-cal:hover { opacity: 0.92; }
+    .btn-cal:active { transform: scale(0.98); }
+
+    .footer {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.25);
+      text-align: center;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="img-half"></div>
+
+  <div class="content">
+    <div>
+      <p class="std-label">Save the Date</p>
+      <div class="std-line"></div>
+      <div class="std-name">ריקי</div>
+    </div>
+
+    <div class="detail">1.8.2026 &nbsp;|&nbsp; 18:00 &nbsp;|&nbsp; פרטים בהמשך</div>
+
+    <a class="btn-cal"
+       href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=בת+מצווה+של+ריקי&dates=20260801T180000/20260801T220000&location=בריכת+שילר&details=מסיבת+בריכה+•+בת+מצווה+של+ריקי"
+       target="_blank">
+      הוסף ליומן
+    </a>
+
+    <div class="footer">מסיבת בריכה • בת מצווה של ריקי • 2026</div>
+  </div>
+
+</body>
+</html>
