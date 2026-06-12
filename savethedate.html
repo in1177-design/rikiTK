@@ -7,11 +7,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400&family=Frank+Ruhl+Libre:wght@300&family=Varela+Round&display=swap" rel="stylesheet" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; }
-
     body {
       font-family: 'Assistant', sans-serif;
-      min-height: 100vh;
       background: #2a1a2e;
       color: #fff;
       display: flex;
@@ -36,7 +33,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 32px 20px 36px;
+      padding: 16px 20px 36px;
       gap: 20px;
     }
 
@@ -56,10 +53,19 @@
       background: rgba(255,255,255,0.25);
       margin: 4px auto;
     }
+    .std-sub {
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      text-align: center;
+      margin-top: 8px;
+      letter-spacing: 0.5px;
+    }
+
     .std-name {
       font-family: 'Frank Ruhl Libre', serif;
       font-weight: 300;
-      font-style: italic;
+      font-style: normal;
       font-size: 3.5rem;
       color: #f8bbd0;
       text-align: center;
@@ -87,7 +93,7 @@
       color: #1a1a1a;
       font-family: 'Assistant', sans-serif;
       font-size: 1.1rem;
-      font-weight: 300;
+      font-weight: 700;
       letter-spacing: 3px;
       text-decoration: none;
       text-align: center;
@@ -113,8 +119,8 @@
   <div class="content">
     <div>
       <p class="std-label">Save the Date</p>
-      <div class="std-line"></div>
-      <div class="std-name">ריקי</div>
+      <div class="std-name">שימרו תאריך</div>
+      <p class="std-sub">ריקי רוצה שתחגגו איתה!</p>
     </div>
 
     <div class="detail">1.8.2026 &nbsp;|&nbsp; 18:00 &nbsp;|&nbsp; פרטים בהמשך</div>
