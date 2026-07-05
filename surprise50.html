@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>בת מצווה של ריקי 🌊</title>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;700&family=Frank+Ruhl+Libre:wght@300&family=Varela+Round&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+
+    body {
+      font-family: 'Assistant', sans-serif;
+      min-height: 100vh;
+      color: #fff;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .ru {
+      display: block;
+      font-family: 'Assistant', sans-serif;
+      font-weight: 300;
+      opacity: 0.75;
+      letter-spacing: 0;
+    }
+
+    /* ─── רקע שלב 1 (בת מצווה) ─── */
+    .bg-cover {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: url('bg.jpg') center top / cover no-repeat;
+      transition: opacity 1s ease;
+    }
+    .bg-cover::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.25) 60%, rgba(0,0,0,0.45) 100%);
+    }
+
+    /* ─── רקע שלב 2 (הפתעה - 50 שנה) ─── */
+    .bg-reveal {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1.2s ease;
+      background:
+        radial-gradient(circle at 50% 20%, rgba(212,175,55,0.35), transparent 55%),
+        linear-gradient(160deg, #2a1a2e 0%, #3a2440 45%, #1f1424 100%);
+      overflow: hidden;
+    }
+    .bg-reveal .big-50 {
+      position: absolute;
+      top: 8%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 12rem;
+      font-weight: 300;
+      color: rgba(212,175,55,0.14);
+      line-height: 1;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    body.revealed .bg-cover { opacity: 0; }
+    body.revealed .bg-reveal { opacity: 1; pointer-events: auto; }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 16px 24px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* ─── שלב 1: הזמנה לבת מצווה ─── */
+    #stageCover {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 0 16px 24px;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    body.revealed #stageCover {
+      opacity: 0;
+      transform: scale(0.96);
+      pointer-events: none;
+    }
+
+    .header { text-align: center; padding: 28px 0 0; margin-top: 100px; }
+    .header .invite-small {
+      font-size: 1.15rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 1px;
+      margin-bottom: 2px;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.4);
+    }
+    .header .invite-small .ru { font-size: 0.85rem; margin-top: 2px; }
+    .header h1 {
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: #f8bbd0;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+      line-height: 1.1;
+      margin: 10px 0 2px;
+    }
+    .header h1 .ru { font-size: 1.05rem; color: #fff; margin-top: 4px; }
+    .header .script {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-weight: 300;
+      font-size: 2.4rem;
+      font-style: italic;
+      color: #fff;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+      display: block;
+      margin-top: 6px;
+    }
+    .header .kids-only {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 6px 16px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.4);
+      font-size: 0.95rem;
+      backdrop-filter: blur(6px);
+    }
+    .header .kids-only .ru { font-size: 0.75rem; opacity: 0.85; }
+
+    .cover-spacer { flex: 1; min-height: 100px; }
+
+    .cover-details {
+      text-align: center;
+      font-family: 'Varela Round', sans-serif;
+      font-size: 1.05rem;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.35);
+      margin-bottom: 8px;
+    }
+    .cover-details .ru {
+      font-family: 'Assistant', sans-serif;
+      font-size: 0.8rem;
+      margin-top: 2px;
+    }
+    .cover-hint {
+      text-align: center;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.6);
+      margin-top: 4px;
+    }
+
+    /* ─── שלב 2: ההפתעה ─── */
+    #stageReveal {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      overflow-y: auto;
+      opacity: 0;
+      transform: translateY(14px);
+      pointer-events: none;
+      transition: opacity 1s ease 0.25s, transform 1s ease 0.25s;
+    }
+    body.revealed #stageReveal {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .reveal-inner {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 48px 18px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .reveal-tag {
+      font-size: 0.95rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 6px;
+    }
+    .reveal-title {
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: #f0c869;
+      text-align: center;
+      text-shadow: 0 2px 24px rgba(0,0,0,0.5);
+      line-height: 1.15;
+    }
+    .reveal-title .ru { font-size: 1rem; color: #fff; opacity: 0.85; margin-top: 6px; }
+
+    .reveal-names {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: 2.1rem;
+      color: #fff;
+      text-align: center;
+      margin: 10px 0 4px;
+    }
+    .reveal-sub {
+      text-align: center;
+      font-size: 1rem;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.7;
+      margin: 14px 0 6px;
+      max-width: 340px;
+    }
+    .reveal-sub .ru { font-size: 0.85rem; margin-top: 4px; }
+
+    .secret-box {
+      margin: 16px 0 6px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      background: rgba(212,175,55,0.14);
+      border: 1px solid rgba(212,175,55,0.4);
+      text-align: center;
+      font-size: 0.95rem;
+    }
+    .secret-box .ru { font-size: 0.78rem; margin-top: 3px; opacity: 0.8; }
+
+    .reveal-details {
+      font-family: 'Varela Round', sans-serif;
+      font-size: 1.1rem;
+      color: #fff;
+      text-align: center;
+      margin: 18px 0 22px;
+      letter-spacing: 0.5px;
+    }
+    .reveal-details .ru {
+      font-family: 'Assistant', sans-serif;
+      font-size: 0.82rem;
+      margin-top: 3px;
+    }
+
+    /* ── Card זכוכית (טופס) ── */
+    .card {
+      width: 100%;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1.5px solid rgba(255,255,255,0.3);
+      border-radius: 22px;
+      padding: 18px 16px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+    }
+    .card h2 { font-size: 1.35rem; font-weight: 700; color: #fff; margin-bottom: 2px; text-align: center; }
+    .card h2 .ru { font-size: 0.78rem; font-weight: 400; margin-top: 2px; }
+    .card .sub-note { text-align: center; font-size: 0.8rem; color: rgba(255,255,255,0.65); margin-bottom: 14px; }
+
+    .form-group { margin-bottom: 10px; }
+    label { display: block; font-weight: 600; margin-bottom: 4px; font-size: 0.8rem; color: #1a1a1a; }
+    label .ru { display: inline; font-weight: 400; font-size: 0.72rem; opacity: 0.7; margin-right: 4px; }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1px solid rgba(255,255,255,0.5);
+      border-radius: 10px;
+      font-size: 0.92rem;
+      font-family: inherit;
+      color: #1a1a2e;
+      background: #E3D3D6;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    input::placeholder, textarea::placeholder { color: #4E6368; }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.25);
+    }
+    textarea { resize: vertical; min-height: 52px; }
+
+    .row { display: flex; gap: 8px; align-items: flex-end; }
+    .row .form-group { flex: 2; }
+    .row .form-group:last-child { flex: 1; }
+
+    .stepper {
+      display: flex;
+      align-items: center;
+      background: #E3D3D6;
+      border: 1px solid rgba(255,255,255,0.5);
+      border-radius: 10px;
+      overflow: hidden;
+      height: 42px;
+    }
+    .stepper.disabled { opacity: 0.4; pointer-events: none; }
+    .step-btn {
+      background: none; border: none; font-size: 1.3rem; padding: 9px 16px;
+      cursor: pointer; color: #1a1a2e; font-family: 'Assistant', sans-serif;
+      transition: background 0.15s;
+    }
+    .step-btn:hover { background: rgba(0,0,0,0.08); }
+    .step-val { flex: 1; text-align: center; font-size: 1rem; font-weight: 600; color: #1a1a2e; }
+
+    .toggle-group { display: flex; gap: 6px; height: 42px; }
+    .toggle {
+      flex: 1; padding: 9px 12px; border: 1px solid rgba(255,255,255,0.5);
+      border-radius: 10px; background: #E3D3D6; color: #1a1a2e;
+      font-family: 'Assistant', sans-serif; font-size: 0.92rem; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .toggle.active { background: rgba(255,255,255,0.9); color: #1a1a2e; border-color: white; font-weight: 600; }
+
+    .btn {
+      width: 100%; padding: 12px; border: none; border-radius: 12px;
+      font-size: 1.1rem; font-weight: 300; letter-spacing: 3px; cursor: pointer;
+      font-family: 'Assistant', sans-serif;
+      background: linear-gradient(135deg, #e9c46a, #d4af37);
+      color: #2a1a2e;
+      font-weight: 700;
+      box-shadow: 0 4px 18px rgba(212,175,55,0.45);
+      transition: opacity 0.2s, transform 0.1s;
+      margin-top: 4px;
+    }
+    .btn:hover { opacity: 0.92; }
+    .btn:active { transform: scale(0.98); }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .msg {
+      display: none; margin-top: 14px; padding: 13px 16px; border-radius: 12px;
+      text-align: center; font-weight: 600; font-size: 0.95rem; line-height: 1.5;
+    }
+    .msg.error { background: rgba(255,255,255,0.9); color: #b71c1c; border: 2px solid #ef9a9a; }
+
+    .spinner {
+      display: none; width: 18px; height: 18px;
+      border: 3px solid rgba(255,255,255,0.4); border-top-color: white;
+      border-radius: 50%; animation: spin 0.7s linear infinite; margin: 0 auto;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .footer {
+      text-align: center; margin-top: 20px; font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .thank-title { font-size: 1.4rem; color: #f0c869; margin-bottom: 10px; text-align: center; }
+    .thank-text  { font-size: 1rem; color: rgba(255,255,255,0.9); line-height: 1.6; margin-bottom: 6px; text-align: center; }
+    .thank-text .ru { font-size: 0.85rem; margin-top: 4px; }
+    .thank-date  { font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-bottom: 6px; font-family: 'Varela Round', sans-serif; text-align: center; }
+    .thank-secret { font-size: 0.85rem; color: rgba(212,175,55,0.9); text-align: center; margin-bottom: 18px; }
+    .btn-cal {
+      display: block; padding: 12px; border-radius: 12px;
+      background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.4);
+      color: #fff; font-family: 'Assistant', sans-serif; font-size: 1rem;
+      text-decoration: none; text-align: center; transition: background 0.2s;
+    }
+    .btn-cal:hover { background: rgba(255,255,255,0.25); }
+  </style>
+</head>
+<body>
+<div class="bg-cover"></div>
+<div class="bg-reveal"><div class="big-50">50</div></div>
+
+<!-- ═══════════ שלב 1 — הזמנה לבת מצווה (כיסוי) ═══════════ -->
+<div id="stageCover">
+  <div class="header">
+    <p class="invite-small">
+      אתם מוזמנים
+      <span class="ru">Вас приглашают</span>
+    </p>
+    <h1>
+      לבת המצווה של ריקי
+      <span class="ru">На бат-мицву Рики</span>
+    </h1>
+    <span class="kids-only">
+      ילדים בלבד 🎈
+      <span class="ru">Только для детей</span>
+    </span>
+  </div>
+
+  <div class="cover-spacer"></div>
+
+  <div class="cover-details">
+    4.9.2026 &nbsp;|&nbsp; אולם סינקו, רחובות
+    <span class="ru">Зал «Синко», Реховот</span>
+  </div>
+  <div class="cover-hint">✨</div>
+</div>
+
+<!-- ═══════════ שלב 2 — ההפתעה האמיתית ═══════════ -->
+<div id="stageReveal">
+  <div class="reveal-inner">
+    <p class="reveal-tag">הפתעה 🎉</p>
+    <h1 class="reveal-title">
+      50 שנות נישואין
+      <span class="ru">Золотая свадьба — 50 лет вместе</span>
+    </h1>
+    <div class="reveal-names">פולינה ומיכאל</div>
+
+    <p class="reveal-sub">
+      זו לא באמת בת המצווה של ריקי... זו מסיבת הפתעה לחגיגת 50 שנות הנישואין של ההורים שלנו!
+      <span class="ru">На самом деле это не бат-мицва Рики... Это сюрприз в честь золотой свадьбы наших родителей!</span>
+    </p>
+
+    <div class="secret-box">
+      🤫 בבקשה שמרו בסוד — גם מפולינה ומיכאל!
+      <span class="ru">Пожалуйста, сохраните это в секрете — даже от Полины и Михаила!</span>
+    </div>
+
+    <div class="reveal-details">
+      4.9.2026 &nbsp;|&nbsp; אולם סינקו, רחובות
+      <span class="ru">Зал «Синко», Реховот</span>
+    </div>
+
+    <!-- טופס אישור הגעה -->
+    <div class="card" id="formCard">
+      <h2>
+        אשרו את הגעתכם
+        <span class="ru">Подтвердите присутствие</span>
+      </h2>
+      <p class="sub-note">כדי לשמור על ההפתעה, אנא לא להזכיר את זה מול פולינה ומיכאל 🤫</p>
+      <form id="form">
+
+        <div class="form-group">
+          <label>שם מלא <span class="ru">Полное имя</span> *</label>
+          <input type="text" id="name" placeholder="שם ושם משפחה" required />
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <label>מגיע/ה? <span class="ru">Придёте?</span></label>
+            <div class="toggle-group">
+              <button type="button" class="toggle active" data-value="כן" onclick="selectAttending(this)">כן</button>
+              <button type="button" class="toggle" data-value="לא" onclick="selectAttending(this)">לא</button>
+              <button type="button" class="toggle" data-value="אולי" onclick="selectAttending(this)">אולי</button>
+            </div>
+            <input type="hidden" id="attending" value="כן" />
+          </div>
+          <div class="form-group">
+            <label>מס' מגיעים <span class="ru">Кол-во</span></label>
+            <div class="stepper" id="stepperWrap">
+              <button type="button" class="step-btn" onclick="changeCount(-1)">−</button>
+              <span class="step-val" id="countDisplay">1</span>
+              <button type="button" class="step-btn" onclick="changeCount(1)">+</button>
+            </div>
+            <input type="hidden" id="count" value="1" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>טלפון <span class="ru">Телефон</span></label>
+          <input type="tel" id="phone" placeholder="050-0000000" />
+        </div>
+
+        <div class="form-group">
+          <label>הערות <span class="ru">Комментарии</span></label>
+          <textarea id="notes" placeholder="רגישויות מזון, הערות..."></textarea>
+        </div>
+
+        <button type="submit" class="btn" id="submitBtn">
+          <span id="btnText">שלח אישור</span>
+          <div class="spinner" id="spinner"></div>
+        </button>
+
+        <div class="msg error" id="errorMsg">שגיאה בשליחה. נסה שוב.</div>
+
+      </form>
+    </div>
+
+    <!-- מסך תודה -->
+    <div class="card" id="thankCard" style="display:none; text-align:center;">
+      <h2 class="thank-title">תודה שאישרתם! 🤫</h2>
+      <p class="thank-text">
+        נשמח לחגוג איתכם את 50 שנות הנישואין של פולינה ומיכאל
+        <span class="ru">Будем рады отпраздновать с вами золотую свадьбу Полины и Михаила</span>
+      </p>
+      <p class="thank-date">4.9.2026 | אולם סינקו, רחובות</p>
+      <p class="thank-secret">שמרו בסוד עד היום הגדול! 🤫</p>
+      <a class="btn-cal"
+         href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=50+שנה+לפולינה+ומיכאל&dates=20260904T190000/20260904T230000&location=אולם+סינקו+רחובות&details=מסיבת+הפתעה+ל-50+שנות+נישואין"
+         target="_blank">
+        הוסף ליומן 📅
+      </a>
+    </div>
+
+    <div class="footer">50 שנות נישואין • פולינה ומיכאל • 2026</div>
+  </div>
+</div>
+
+<script>
+  // ── מעבר אוטומטי מהכיסוי להפתעה אחרי 2 שניות ──
+  const REVEAL_DELAY = 2000;
+  let revealed = false;
+
+  function reveal() {
+    if (revealed) return;
+    revealed = true;
+    document.body.classList.add('revealed');
+    launchConfetti();
+  }
+
+  setTimeout(reveal, REVEAL_DELAY);
+  // אפשר גם ללחוץ על המסך כדי לחשוף מיד
+  document.getElementById('stageCover').addEventListener('click', reveal);
+
+  // ── טופס אישור הגעה ──
+  const SCRIPT_URL_50 = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE'; // ראו SETUP_50.md
+
+  function selectAttending(btn) {
+    document.querySelectorAll('.toggle').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const val = btn.dataset.value;
+    document.getElementById('attending').value = val;
+    const stepper = document.getElementById('stepperWrap');
+    if (val === 'לא') {
+      stepper.classList.add('disabled');
+      document.getElementById('count').value = 0;
+      document.getElementById('countDisplay').textContent = '0';
+    } else {
+      stepper.classList.remove('disabled');
+      if (document.getElementById('count').value === '0') {
+        document.getElementById('count').value = 1;
+        document.getElementById('countDisplay').textContent = '1';
+      }
+    }
+  }
+
+  function changeCount(delta) {
+    const input = document.getElementById('count');
+    const display = document.getElementById('countDisplay');
+    let val = parseInt(input.value) + delta;
+    if (val < 1) val = 1;
+    if (val > 20) val = 20;
+    input.value = val;
+    display.textContent = val;
+  }
+
+  document.getElementById('form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
+    const spinner = document.getElementById('spinner');
+
+    btn.disabled = true;
+    btnText.style.display = 'none';
+    spinner.style.display = 'block';
+    document.getElementById('errorMsg').style.display = 'none';
+
+    const data = {
+      name:      document.getElementById('name').value.trim(),
+      attending: document.getElementById('attending').value,
+      count:     document.getElementById('count').value,
+      phone:     document.getElementById('phone').value.trim(),
+      notes:     document.getElementById('notes').value.trim(),
+    };
+
+    try {
+      await fetch(SCRIPT_URL_50, { method: 'POST', body: JSON.stringify(data), mode: 'no-cors' });
+      document.getElementById('formCard').style.display = 'none';
+      document.getElementById('thankCard').style.display = 'block';
+    } catch {
+      document.getElementById('errorMsg').style.display = 'block';
+      btnText.style.display = 'block';
+      spinner.style.display = 'none';
+      btn.disabled = false;
+    }
+  });
+
+  function launchConfetti() {
+    const canvas = document.getElementById('confettiCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const colors = ['#d4af37','#f0c869','#f5e1a4','#fff5d7','#c2185b','#f48fb1'];
+    const particles = [];
+
+    for (let i = 0; i < 140; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: -20 - Math.random() * 200,
+        w: 6 + Math.random() * 6,
+        h: 3 + Math.random() * 4,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        speed: 1.5 + Math.random() * 2.5,
+        angle: Math.random() * Math.PI * 2,
+        spin: (Math.random() - 0.5) * 0.12,
+        swing: Math.random() * Math.PI * 2,
+        swingSpeed: 0.03 + Math.random() * 0.03,
+        swingAmp: 1.5 + Math.random() * 2,
+      });
+    }
+
+    let animId;
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      let alive = false;
+
+      for (const p of particles) {
+        p.y += p.speed;
+        p.swing += p.swingSpeed;
+        p.x += Math.sin(p.swing) * p.swingAmp;
+        p.angle += p.spin;
+
+        if (p.y < canvas.height + 20) alive = true;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.angle);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        ctx.restore();
+      }
+
+      if (alive) {
+        animId = requestAnimationFrame(draw);
+      } else {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        cancelAnimationFrame(animId);
+      }
+    }
+
+    draw();
+  }
+</script>
+<canvas id="confettiCanvas" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9999;"></canvas>
+</body>
+</html>
