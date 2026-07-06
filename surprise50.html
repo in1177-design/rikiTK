@@ -250,7 +250,9 @@
     }
 
     /* ── גלריית תמונות (קרוסל) ── */
-    .gallery-section { width: 100%; margin: 6px 0 24px; }
+    /* direction:ltr כאן כדי שהחישוב full-bleed של .gallery-grid יתנהג נכון (בעמוד RTL בלוק
+       שרחב יותר מהמכל שלו "נדבק" כברירת מחדל לימין, לא לשמאל - זה שבר את חישוב הרוחב המלא) */
+    .gallery-section { width: 100%; margin: 6px 0 24px; direction: ltr; }
     .gallery-label {
       text-align: center;
       font-size: 0.95rem;
@@ -260,15 +262,16 @@
     }
     .gallery-label .ru { font-size: 0.75rem; margin-top: 2px; }
 
-    /* גריד תמונות - סדר קבוע (LTR) בלי קשר לכיווניות שאר הדף */
+    /* גריד תמונות - פרוס על כל רוחב המסך (full-bleed), חורג מהעמודה הצרה */
     .gallery-grid {
       direction: ltr;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 4px;
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+      gap: 0;
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      margin-left: -50vw;
     }
     .gallery-grid .thumb {
       aspect-ratio: 1 / 1;
@@ -635,8 +638,8 @@
   // ── גלריית תמונות: גריד + לייטבוקס עם דפדוף ──
   // להוסיף תמונות בעתיד: מוסיפים קובץ לתיקיית photos/ ומוסיפים את שם הקובץ לרשימה כאן.
   const PHOTOS = [
-    '1985.jpg', '1996.jpg', '2012.jpg', '2012_2.jpg', '2012_3.jpg',
-    '2014.jpg', '202t.jpg', '2022_1.jpg', '2022_2.jpg', '2026.jpg', '2026_2.jpg',
+    '1976.jpg', '1985.jpg', '1996.jpg', '2012.jpg', '2012_2.jpg', '2012_3.jpg',
+    '2014.jpg', '2021.jpg', '2022_1.jpg', '2022_2.jpg', '2026.jpg', '2026_2.jpg',
   ].sort((a, b) => (parseInt(a) || 0) - (parseInt(b) || 0));
 
   const grid = document.getElementById('galleryGrid');
