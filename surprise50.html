@@ -188,41 +188,105 @@
       align-items: center;
     }
 
-    .reveal-tag {
-      font-size: 0.95rem;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.55);
+    /* כותרת ראשית - "קובייה" על כל רוחב המסך */
+    .mega-title-wrap { width: 100%; direction: ltr; }
+    .mega-title {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      margin-left: -50vw;
+      background: linear-gradient(135deg, #e9c46a, #d4af37);
+      color: #2a1a2e;
+      text-align: center;
+      font-weight: 800;
+      font-size: 1.85rem;
+      line-height: 1.35;
+      padding: 30px 18px;
+      box-shadow: 0 6px 30px rgba(0,0,0,0.35);
+      direction: rtl;
+    }
+
+    /* פיצול דו-לשוני - שתי עמודות בצבעים שונים, עברית מול רוסית */
+    /* שורת פרטי אירוע - יום / תאריך / שעה / מיקום */
+    .event-bar-wrap { width: 100%; direction: ltr; }
+    .event-bar {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      margin-left: -50vw;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: #2a1a2e;
+      direction: rtl;
+    }
+    .event-item {
+      padding: 18px 10px;
+      text-align: center;
+      border-inline-start: 1px solid rgba(255,255,255,0.12);
+    }
+    .event-item:first-child { border-inline-start: none; }
+    .event-label {
+      display: block;
+      font-size: 0.78rem;
+      color: #d4af37;
       margin-bottom: 6px;
     }
-    .reveal-title {
-      font-size: 2.6rem;
+    .event-value {
+      display: block;
       font-weight: 700;
-      color: #f0c869;
-      text-align: center;
-      text-shadow: 0 2px 24px rgba(0,0,0,0.5);
-      line-height: 1.15;
-    }
-    .reveal-title .ru { font-size: 1rem; color: #fff; opacity: 0.85; margin-top: 6px; }
-
-    .reveal-names {
-      font-family: 'Frank Ruhl Libre', serif;
-      font-weight: 300;
-      font-style: italic;
-      font-size: 2.1rem;
       color: #fff;
-      text-align: center;
-      margin: 10px 0 4px;
+      font-size: 0.95rem;
     }
-    .reveal-sub {
-      text-align: center;
-      font-size: 1rem;
-      color: rgba(255,255,255,0.85);
-      line-height: 1.7;
-      margin: 14px 0 6px;
-      max-width: 340px;
+
+    .bilingual-wrap { width: 100%; direction: ltr; margin: 18px 0 6px; }
+    .bilingual-split {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      margin-left: -50vw;
+      display: flex;
     }
-    .reveal-sub .ru { font-size: 0.85rem; margin-top: 4px; }
+
+    /* מובייל: פרטי אירוע ב-2x2 ופאנלים דו-לשוניים אחד מתחת לשני */
+    @media (max-width: 767px) {
+      .event-bar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .event-item:nth-child(2) { border-inline-start: 1px solid rgba(255,255,255,0.12); }
+      .event-item:nth-child(3) {
+        border-inline-start: none;
+        border-top: 1px solid rgba(255,255,255,0.12);
+      }
+      .event-item:nth-child(4) { border-top: 1px solid rgba(255,255,255,0.12); }
+      .bilingual-split { flex-direction: column; }
+    }
+    .bilingual-panel {
+      flex: 1;
+      padding: 28px 20px;
+    }
+    .bilingual-panel .panel-tag {
+      display: block;
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      color: #d4af37;
+      opacity: 0.9;
+      margin-bottom: 10px;
+    }
+    .bilingual-panel .letter-title {
+      display: block;
+      font-family: 'Frank Ruhl Libre', serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+    }
+    .bilingual-panel p {
+      font-size: 0.92rem;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .bilingual-panel p:last-child { margin-bottom: 0; }
+    .bilingual-panel.he { background: #3a2440; color: #fff; direction: rtl; text-align: right; }
+    .bilingual-panel.ru { background: #241730; color: rgba(255,255,255,0.85); direction: ltr; text-align: left; }
 
     .secret-box {
       margin: 16px 0 6px;
@@ -504,34 +568,38 @@
 <!-- ═══════════ שלב 2 — ההפתעה האמיתית ═══════════ -->
 <div id="stageReveal">
   <div class="reveal-inner">
-    <p class="reveal-tag">הפתעה 🎉</p>
-    <h1 class="reveal-title">
-      50 שנות נישואין
-      <span class="ru">Золотая свадьба — 50 лет вместе</span>
-    </h1>
-    <div class="reveal-names">פולינה ומיכאל</div>
-
-    <p class="reveal-sub">
-      זו לא באמת בת המצווה של ריקי... זו מסיבת הפתעה לחגיגת 50 שנות הנישואין של ההורים שלנו!
-      <span class="ru">На самом деле это не бат-мицва Рики... Это сюрприз в честь золотой свадьбы наших родителей!</span>
-    </p>
-
-    <div class="secret-box">
-      🤫 בבקשה שמרו בסוד — גם מפולינה ומיכאל!
-      <span class="ru">Пожалуйста, сохраните это в секрете — даже от Полины и Михаила!</span>
+    <div class="mega-title-wrap">
+      <div class="mega-title">חוגגים לטסיסים<br>50 שנות נישואים<br>בהפתעה! 🎉</div>
     </div>
 
-    <div class="reveal-details">
-      4.9.2026 &nbsp;|&nbsp; אולם סינקו, רחובות
-      <span class="ru">Зал «Синко», Реховот</span>
+    <div class="event-bar-wrap">
+      <div class="event-bar">
+        <div class="event-item"><span class="event-label">יום</span><span class="event-value">יום שישי</span></div>
+        <div class="event-item"><span class="event-label">תאריך</span><span class="event-value">4.9.2026</span></div>
+        <div class="event-item"><span class="event-label">שעה</span><span class="event-value">12:30</span></div>
+        <div class="event-item"><span class="event-label">מיקום</span><span class="event-value">אולם סינקו, רחובות</span></div>
+      </div>
+    </div>
+
+    <div class="bilingual-wrap">
+      <div class="bilingual-split">
+        <div class="bilingual-panel he">
+          <span class="panel-tag">✦ הזמנה ✦</span>
+          <span class="letter-title">משפחה וחברים יקרים,</span>
+          <p>אנחנו מזמינים אתכם להשתתף במסיבת חתונת ה-50 של ההורים שלנו. כמו שאתם מכירים אותם, החלטנו לא לספר להם מראש.</p>
+          <p>הם מוזמנים לבת המצווה של ריקי (האמיתית לגמרי!), ואתכם אנחנו מזמינים להגיע ולחגוג איתם בהפתעה גמורה. אנא שימרו על הסוד! ניפגש.</p>
+        </div>
+        <div class="bilingual-panel ru">
+          <span class="panel-tag">✦ ПРИГЛАШЕНИЕ ✦</span>
+          <span class="letter-title">Дорогие близкие и друзья,</span>
+          <p>Мы приглашаем вас принять участие в праздновании 50-летия свадьбы наших родителей. Как вы их знаете, мы решили не говорить им заранее.</p>
+          <p>Они приглашены на Бат-Мицву Рики (самую настоящую!), а вас мы приглашаем прийти и отпраздновать вместе с ними этот грандиозный сюрприз. Пожалуйста, сохраняйте это в секрете! До встречи.</p>
+        </div>
+      </div>
     </div>
 
     <!-- גלריית תמונות -->
     <div class="gallery-section">
-      <p class="gallery-label">
-        50 שנה בתמונות
-        <span class="ru">50 лет в фотографиях</span>
-      </p>
       <div class="gallery-grid" id="galleryGrid"></div>
     </div>
 
