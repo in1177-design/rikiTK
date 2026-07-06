@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>בת מצווה של ריקי 🌊</title>
+  <title>בת מצווה של ריקי</title>
   <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;700;800&family=Frank+Ruhl+Libre:wght@300&family=Varela+Round&family=Nunito:wght@700;800&display=swap" rel="stylesheet" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -362,6 +362,10 @@
     .bilingual-panel p:last-child { margin-bottom: 0; }
     .bilingual-panel.he { background: #3a2440; color: #fff; direction: rtl; text-align: right; }
     .bilingual-panel.ru { background: #241730; color: rgba(255,255,255,0.85); direction: ltr; text-align: left; }
+    /* הטקסט הרוסי נראה גדול/כבד יותר מהעברי באותו גודל - מקטינים טיפה ומשתמשים
+       במשקל דק (Assistant Light) כדי לאזן ויזואלית בין השפות */
+    .bilingual-panel.ru p { font-size: 1rem; font-weight: 300; }
+    .bilingual-panel.ru .letter-title { font-size: 1.05rem; }
 
     /* כפתור "אשר את ההגעה" - גולל לטופס */
     .cta-wrap { width: 100%; direction: ltr; }
@@ -571,7 +575,7 @@
     input:focus, select:focus, textarea:focus {
       outline: none;
       border-color: rgba(255,255,255,0.9);
-      background: rgba(255,255,255,0.25);
+      background: #fff;
     }
     textarea { resize: vertical; min-height: 52px; }
 
@@ -681,13 +685,17 @@
     .thank-title { font-size: 1.4rem; color: #f0c869; margin-bottom: 10px; text-align: center; }
     .thank-text  { font-size: 1rem; color: rgba(255,255,255,0.9); line-height: 1.6; margin-bottom: 6px; text-align: center; }
     .thank-text .ru { font-size: 0.85rem; margin-top: 4px; }
-    .thank-date  { font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-bottom: 6px; font-family: 'Varela Round', sans-serif; text-align: center; }
-    .thank-secret { font-size: 0.85rem; color: rgba(212,175,55,0.9); text-align: center; margin-bottom: 18px; }
+    .thank-date  { font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-bottom: 14px; font-family: 'Varela Round', sans-serif; text-align: center; }
+    .thank-secret { font-size: 18px; font-weight: 700; color: rgba(212,175,55,0.9); text-align: center; margin: 6px 0 0; }
+    .thank-secret .ru { display: block; font-size: 0.72rem; margin-top: 2px; opacity: 0.85; }
+    .thank-contact { font-size: 0.85rem; color: rgba(255,255,255,0.75); text-align: center; margin: 16px 0 6px; }
+    .thank-contact .ru { display: block; font-size: 0.72rem; margin-top: 2px; opacity: 0.85; }
     .btn-cal {
       display: block; padding: 12px; border-radius: 12px;
       background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.4);
       color: #fff; font-family: 'Assistant', sans-serif; font-size: 1rem;
       text-decoration: none; text-align: center; transition: background 0.2s;
+      margin-bottom: 4px;
     }
     .btn-cal:hover { background: rgba(255,255,255,0.25); }
   </style>
@@ -754,8 +762,9 @@
           <div class="panel-content">
             <span class="panel-tag">✦ הזמנה ✦</span>
             <span class="letter-title">משפחה וחברים יקרים,</span>
-            <p>אנחנו מזמינים אתכם להשתתף במסיבת חתונת ה-50 של ההורים שלנו. כמו שאתם מכירים אותם, החלטנו לא לספר להם מראש.</p>
-            <p>הם מוזמנים לבת המצווה של ריקי (האמיתית לגמרי!), ואתכם אנחנו מזמינים להגיע ולחגוג איתם בהפתעה גמורה. אנא שימרו על הסוד! ניפגש.</p>
+            <p>אנחנו מזמינים אתכם להשתתף במסיבת יום נישואים ה-50 של ההורים שלנו. כמו שאתם מכירים אותם, החלטנו לא לספר להם מראש.</p>
+            <p>הם בטוחים שהם מוזמנים לבת המצווה של ריקי, אבל אתכם אנחנו מזמינים להגיע למסיבה האמיתית ולחגוג איתם את חתונת הזהב! (אתם כמובן מוזמנים להגיד מזל טוב גם לריקי :)</p>
+            <p>אנא שימרו על הסוד שלנו! ניפגש.</p>
           </div>
         </div>
         <div class="bilingual-panel ru">
@@ -763,7 +772,8 @@
             <span class="panel-tag">✦ ПРИГЛАШЕНИЕ ✦</span>
             <span class="letter-title">Дорогие близкие и друзья,</span>
             <p>Мы приглашаем вас принять участие в праздновании 50-летия свадьбы наших родителей. Как вы их знаете, мы решили не говорить им заранее.</p>
-            <p>Они приглашены на Бат-Мицву Рики (самую настоящую!), а вас мы приглашаем прийти и отпраздновать вместе с ними этот грандиозный сюрприз. Пожалуйста, сохраняйте это в секрете! До встречи.</p>
+            <p>Они уверены, что приглашены на Бат-Мицву Рики, но вас мы приглашаем прийти на настоящую вечеринку и отпраздновать вместе с ними их золотую свадьбу! (Вы, конечно же, также можете поздравить и Рики :)</p>
+            <p>Пожалуйста, сохраняйте наш секрет! До встречи.</p>
           </div>
         </div>
       </div>
@@ -797,7 +807,7 @@
         אשרו את הגעתכם
         <span class="ru">Подтвердите присутствие</span>
       </h2>
-      <p class="sub-note">כדי לשמור על ההפתעה, אנא לא להזכיר את זה מול פולינה ומיכאל 🤫</p>
+      <p class="sub-note">כדי לשמור על ההפתעה, אנא לא להזכיר את זה מול פולינה ומיכאל</p>
       <form id="form">
 
         <div class="form-group fg-name">
@@ -858,18 +868,26 @@
 
     <!-- מסך תודה -->
     <div class="card" id="thankCard" style="display:none; text-align:center;">
-      <h2 class="thank-title">תודה שאישרתם! 🤫</h2>
-      <p class="thank-text">
-        נשמח לחגוג איתכם את 50 שנות הנישואין של פולינה ומיכאל
-        <span class="ru">Будем рады отпраздновать с вами золотую свадьбу Полины и Михаила</span>
-      </p>
-      <p class="thank-date">4.9.2026 | אולם סינקו, רחובות</p>
-      <p class="thank-secret">שמרו בסוד עד היום הגדול! 🤫</p>
-      <a class="btn-cal"
-         href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=50+שנה+לפולינה+ומיכאל&dates=20260904T190000/20260904T230000&location=אולם+סינקו+רחובות&details=מסיבת+הפתעה+ל-50+שנות+נישואין"
-         target="_blank">
-        הוסף ליומן 📅
-      </a>
+      <!-- גרסה: מגיעים (כן / אולי) -->
+      <div id="thankYes">
+        <h2 class="thank-title">תודה שאישרתם!</h2>
+        <a class="btn-cal"
+           href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=50+שנה+לפולינה+ומיכאל&dates=20260904T123000/20260904T163000&location=אולם+סינקו+רחובות&details=מסיבת+הפתעה+ל-50+שנות+נישואין+של+פולינה+ומיכאל+טסיס"
+           target="_blank">
+          הוספה ליומן
+        </a>
+        <p class="thank-contact">לכל שאלה צרו קשר עם אינה: 054-4923904</p>
+        <p class="thank-text">מחכים לראות אתכם.</p>
+        <p class="thank-secret">שמרו בסוד עד היום הגדול!</p>
+      </div>
+
+      <!-- גרסה: לא מגיעים -->
+      <div id="thankNo" style="display:none;">
+        <h2 class="thank-title">חבל שלא נפגש, נתגעגע אליכם!</h2>
+        <p class="thank-text">תודה שעדכנתם אותנו.</p>
+        <p class="thank-contact">לכל שאלה צרו קשר עם אינה: 054-4923904</p>
+        <p class="thank-secret">שמרו בסוד עד היום הגדול!</p>
+      </div>
     </div>
 
     <div class="footer">50 שנות נישואין • פולינה ומיכאל • 2026</div>
@@ -1058,6 +1076,9 @@
       await fetch(SCRIPT_URL_50, { method: 'POST', body: JSON.stringify(data), mode: 'no-cors' });
       document.getElementById('formCard').style.display = 'none';
       document.getElementById('thankCard').style.display = 'block';
+      const isNotAttending = data.attending === 'לא';
+      document.getElementById('thankYes').style.display = isNotAttending ? 'none' : 'block';
+      document.getElementById('thankNo').style.display = isNotAttending ? 'block' : 'none';
     } catch {
       document.getElementById('errorMsg').style.display = 'block';
       btnText.style.display = 'block';
