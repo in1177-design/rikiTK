@@ -173,6 +173,22 @@
       filter: drop-shadow(0 4px 16px rgba(0,0,0,0.4));
       animation: shhWiggle 1.6s ease-in-out infinite;
     }
+    .shh-typed {
+      margin-top: 14px;
+      font-family: 'Varela Round', sans-serif;
+      font-size: 1.5rem;
+      color: #f0e6cc;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.4);
+      min-height: 1.4em;
+    }
+    .shh-typed::after {
+      content: '|';
+      margin-inline-start: 2px;
+      animation: shhCursorBlink 0.8s step-start infinite;
+    }
+    @keyframes shhCursorBlink {
+      50% { opacity: 0; }
+    }
     @keyframes shhFadeIn {
       from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
@@ -706,6 +722,7 @@
     </button>
     <div class="shh-text" id="shhText">
       <img class="shh-img" src="photos/shhh.png" alt="ששש" />
+      <div class="shh-typed" id="shhTyped"></div>
     </div>
   </div>
 </div>
@@ -860,8 +877,8 @@
 </div>
 
 <script>
-  // ── לחיצה על "המשך לפרטים" -> מציגים "ששש..." ואז אחרי 2 שניות עוברים להפתעה ──
-  const REVEAL_DELAY = 2000;
+  // ── לחיצה על "המשך לפרטים" -> מציגים "ששש..." ואז אחרי שהכתיבה מסתיימת עוברים להפתעה ──
+  const REVEAL_DELAY = 2400;
   let revealed = false;
 
   function reveal() {
@@ -871,10 +888,21 @@
     launchConfetti();
   }
 
+  function typeText(el, text, speed) {
+    el.textContent = '';
+    let i = 0;
+    (function step() {
+      i++;
+      el.textContent = text.slice(0, i);
+      if (i < text.length) setTimeout(step, speed);
+    })();
+  }
+
   function startSurprise() {
     document.getElementById('continueBtn').style.display = 'none';
     document.getElementById('shhText').classList.add('visible');
     document.body.classList.add('surprise-starting');
+    typeText(document.getElementById('shhTyped'), 'ששש... כאן מתחילה ההפתעה', 90);
     setTimeout(reveal, REVEAL_DELAY);
   }
 
@@ -1051,8 +1079,8 @@
       particles.push({
         x: Math.random() * canvas.width,
         y: -20 - Math.random() * 200,
-        w: 6 + Math.random() * 6,
-        h: 3 + Math.random() * 4,
+        w: 4 + Math.random() * 4,
+        h: 2 + Math.random() * 3,
         color: colors[Math.floor(Math.random() * colors.length)],
         speed: 1.5 + Math.random() * 2.5,
         angle: Math.random() * Math.PI * 2,
