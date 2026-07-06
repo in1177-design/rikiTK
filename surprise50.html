@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>בת מצווה של ריקי 🌊</title>
-  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;700&family=Frank+Ruhl+Libre:wght@300&family=Varela+Round&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;700;800&family=Frank+Ruhl+Libre:wght@300&family=Varela+Round&family=Nunito:wght@700;800&display=swap" rel="stylesheet" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; }
@@ -15,6 +15,7 @@
       color: #fff;
       position: relative;
       overflow-x: hidden;
+      background: #2a1a2e;
     }
 
     .ru {
@@ -32,6 +33,9 @@
       z-index: 0;
       background: url('bg.jpg') center top / cover no-repeat;
       transition: opacity 1s ease;
+    }
+    @media (min-width: 1024px) {
+      .bg-cover { background-image: url('photos/bg-desktop.jpg'); }
     }
     .bg-cover::after {
       content: '';
@@ -68,6 +72,7 @@
     }
 
     body.revealed .bg-cover { opacity: 0; }
+    body.surprise-starting .bg-cover { opacity: 0.1; }
     body.revealed .bg-reveal { opacity: 1; pointer-events: auto; }
 
     .page {
@@ -130,18 +135,6 @@
       display: block;
       margin-top: 6px;
     }
-    .header .kids-only {
-      display: inline-block;
-      margin-top: 14px;
-      padding: 6px 16px;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.18);
-      border: 1px solid rgba(255,255,255,0.4);
-      font-size: 0.95rem;
-      backdrop-filter: blur(6px);
-    }
-    .header .kids-only .ru { font-size: 0.75rem; opacity: 0.85; }
-
     .cover-spacer { flex: 1; min-height: 100px; }
 
     .cover-details {
@@ -156,11 +149,38 @@
       font-size: 0.8rem;
       margin-top: 2px;
     }
-    .cover-hint {
+    .cover-cta {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
       text-align: center;
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.6);
-      margin-top: 4px;
+      z-index: 3;
+    }
+    .shh-text {
+      display: none;
+      margin-top: 14px;
+      text-align: center;
+      animation: shhFadeIn 0.5s ease;
+    }
+    .shh-text.visible { display: block; }
+    .shh-img {
+      width: 140px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      filter: drop-shadow(0 4px 16px rgba(0,0,0,0.4));
+      animation: shhWiggle 1.6s ease-in-out infinite;
+    }
+    @keyframes shhFadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes shhWiggle {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-8px); }
+      75% { transform: translateX(8px); }
     }
 
     /* ─── שלב 2: ההפתעה ─── */
@@ -182,7 +202,7 @@
     .reveal-inner {
       max-width: 400px;
       margin: 0 auto;
-      padding: 48px 18px 40px;
+      padding: 36px 18px 40px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -195,15 +215,29 @@
       position: relative;
       left: 50%;
       margin-left: -50vw;
-      background: linear-gradient(135deg, #e9c46a, #d4af37);
-      color: #2a1a2e;
+      background: linear-gradient(160deg, #2a1a2e 0%, #3a2440 60%, #1f1424 100%);
       text-align: center;
-      font-weight: 800;
-      font-size: 1.85rem;
-      line-height: 1.35;
-      padding: 30px 18px;
+      padding: 26px 18px 22px;
       box-shadow: 0 6px 30px rgba(0,0,0,0.35);
       direction: rtl;
+    }
+    .mega-title .mega-headline {
+      display: block;
+      color: #F0E6CC;
+      text-align: center;
+      font-family: 'Assistant', sans-serif;
+      font-size: 36px;
+      font-style: normal;
+      font-weight: 800;
+      line-height: normal;
+    }
+    .mega-title .mega-tag {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 3px;
+      color: #d4af37;
+      margin-bottom: 12px;
     }
 
     /* פיצול דו-לשוני - שתי עמודות בצבעים שונים, עברית מול רוסית */
@@ -214,13 +248,19 @@
       position: relative;
       left: 50%;
       margin-left: -50vw;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
       background: #2a1a2e;
       direction: rtl;
     }
+    .event-bar-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    /* מעל 1400px: הרקע ממשיך להתפרס, אבל תוכן פרטי האירוע נשאר קבוע במקום ולא זז */
+    @media (min-width: 1400px) {
+      .event-bar-inner { max-width: 1400px; margin: 0 auto; }
+    }
     .event-item {
-      padding: 18px 10px;
+      padding: 14px 10px;
       text-align: center;
       border-inline-start: 1px solid rgba(255,255,255,0.12);
     }
@@ -235,10 +275,10 @@
       display: block;
       font-weight: 700;
       color: #fff;
-      font-size: 0.95rem;
+      font-size: 1.4rem;
     }
 
-    .bilingual-wrap { width: 100%; direction: ltr; margin: 18px 0 6px; }
+    .bilingual-wrap { width: 100%; direction: ltr; margin: 0; }
     .bilingual-split {
       width: 100vw;
       position: relative;
@@ -249,7 +289,7 @@
 
     /* מובייל: פרטי אירוע ב-2x2 ופאנלים דו-לשוניים אחד מתחת לשני */
     @media (max-width: 767px) {
-      .event-bar {
+      .event-bar-inner {
         grid-template-columns: repeat(2, 1fr);
       }
       .event-item:nth-child(2) { border-inline-start: 1px solid rgba(255,255,255,0.12); }
@@ -262,7 +302,26 @@
     }
     .bilingual-panel {
       flex: 1;
-      padding: 28px 20px;
+      padding: 22px 20px;
+    }
+    /* מסכים רחבים מ-1400px: הרקע ממשיך להתפרס על כל השטח, אבל תוכן הטקסט
+       נשאר קבוע במקום (לא זז/מתרחב) - לפי מפרט Figma, ריפוד א-סימטרי כך שהתוכן
+       צמוד לקו החלוקה במרכז ומרוחק מקצוות המסך */
+    @media (min-width: 1400px) {
+      .bilingual-panel {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        height: 400px;
+      }
+      .bilingual-panel.he { padding: 70px 56px 80px 200px; }
+      .bilingual-panel.ru { padding: 70px 200px 80px 56px; }
+      .bilingual-panel .panel-content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        align-self: stretch;
+      }
     }
     .bilingual-panel .panel-tag {
       display: block;
@@ -274,19 +333,56 @@
     }
     .bilingual-panel .letter-title {
       display: block;
-      font-family: 'Frank Ruhl Libre', serif;
+      font-family: 'Assistant', sans-serif;
       font-weight: 700;
       font-size: 1.15rem;
       margin-bottom: 10px;
     }
     .bilingual-panel p {
-      font-size: 0.92rem;
+      font-size: 1.1rem;
       line-height: 1.65;
       margin-bottom: 10px;
     }
     .bilingual-panel p:last-child { margin-bottom: 0; }
     .bilingual-panel.he { background: #3a2440; color: #fff; direction: rtl; text-align: right; }
     .bilingual-panel.ru { background: #241730; color: rgba(255,255,255,0.85); direction: ltr; text-align: left; }
+
+    /* כפתור "אשר את ההגעה" - גולל לטופס */
+    .cta-wrap { width: 100%; direction: ltr; }
+    .cta-section {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      margin-left: -50vw;
+      background: linear-gradient(160deg, #2a1a2e 0%, #3a2440 60%, #1f1424 100%);
+      text-align: center;
+      padding: 26px 18px;
+      direction: rtl;
+    }
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 40px;
+      border: none;
+      border-radius: 30px;
+      background: linear-gradient(135deg, #e9c46a, #d4af37);
+      cursor: pointer;
+      box-shadow: 0 6px 22px rgba(212,175,55,0.4);
+      transition: transform 0.1s, opacity 0.2s;
+    }
+    .btn-cta:hover { opacity: 0.92; }
+    .btn-cta:active { transform: scale(0.97); }
+    .btn-cta span {
+      color: #0d0905;
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      text-align: center;
+      white-space: nowrap;
+    }
 
     .secret-box {
       margin: 16px 0 6px;
@@ -316,7 +412,7 @@
     /* ── גלריית תמונות (קרוסל) ── */
     /* direction:ltr כאן כדי שהחישוב full-bleed של .gallery-grid יתנהג נכון (בעמוד RTL בלוק
        שרחב יותר מהמכל שלו "נדבק" כברירת מחדל לימין, לא לשמאל - זה שבר את חישוב הרוחב המלא) */
-    .gallery-section { width: 100%; margin: 6px 0 24px; direction: ltr; }
+    .gallery-section { width: 100%; margin: 0 0 16px; direction: ltr; }
     .gallery-label {
       text-align: center;
       font-size: 0.95rem;
@@ -422,21 +518,27 @@
     /* ── Card זכוכית (טופס) ── */
     .card {
       width: 100%;
-      background: rgba(255,255,255,0.12);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border: 1.5px solid rgba(255,255,255,0.3);
-      border-radius: 22px;
       padding: 18px 16px;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.3);
     }
     .card h2 { font-size: 1.35rem; font-weight: 700; color: #fff; margin-bottom: 2px; text-align: center; }
     .card h2 .ru { font-size: 0.78rem; font-weight: 400; margin-top: 2px; }
     .card .sub-note { text-align: center; font-size: 0.8rem; color: rgba(255,255,255,0.65); margin-bottom: 14px; }
 
     .form-group { margin-bottom: 10px; }
-    label { display: block; font-weight: 600; margin-bottom: 4px; font-size: 0.8rem; color: #1a1a1a; }
-    label .ru { display: inline; font-weight: 400; font-size: 0.72rem; opacity: 0.7; margin-right: 4px; }
+    label {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      font-size: 0.8rem;
+      color: rgba(240,230,204,0.55);
+      transition: color 0.2s;
+    }
+    .form-group:focus-within label,
+    .row .form-group:focus-within label { color: #f0e6cc; }
+    label .ru { font-weight: 400; font-size: 0.72rem; opacity: 0.85; }
 
     input, select, textarea {
       width: 100%;
@@ -458,8 +560,7 @@
     textarea { resize: vertical; min-height: 52px; }
 
     .row { display: flex; gap: 8px; align-items: flex-end; }
-    .row .form-group { flex: 2; }
-    .row .form-group:last-child { flex: 1; }
+    .row .form-group { flex: 1; }
 
     .stepper {
       display: flex;
@@ -489,19 +590,31 @@
     .toggle.active { background: rgba(255,255,255,0.9); color: #1a1a2e; border-color: white; font-weight: 600; }
 
     .btn {
-      width: 100%; padding: 12px; border: none; border-radius: 12px;
-      font-size: 1.1rem; font-weight: 300; letter-spacing: 3px; cursor: pointer;
-      font-family: 'Assistant', sans-serif;
+      width: 100%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
       background: linear-gradient(135deg, #e9c46a, #d4af37);
-      color: #2a1a2e;
-      font-weight: 700;
-      box-shadow: 0 4px 18px rgba(212,175,55,0.45);
+      box-shadow: 0 6px 22px rgba(212,175,55,0.4);
       transition: opacity 0.2s, transform 0.1s;
       margin-top: 4px;
     }
     .btn:hover { opacity: 0.92; }
     .btn:active { transform: scale(0.98); }
     .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .btn #btnText {
+      color: #0d0905;
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
 
     .msg {
       display: none; margin-top: 14px; padding: 13px 16px; border-radius: 12px;
@@ -515,6 +628,34 @@
       border-radius: 50%; animation: spin 0.7s linear infinite; margin: 0 auto;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── ניסיון: גרסת דסקטופ רוחבית לטופס (לא סופי) ── */
+    @media (min-width: 1024px) {
+      .reveal-inner { max-width: 760px; }
+      #form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4px 20px;
+        grid-template-areas:
+          "name     phone"
+          "attending attending"
+          "counts   counts"
+          "notes    notes"
+          "submit   submit";
+      }
+      .fg-name { grid-area: name; }
+      .fg-phone { grid-area: phone; }
+      .fg-attending { grid-area: attending; }
+      .fg-counts { grid-area: counts; margin: 0; }
+      .fg-notes { grid-area: notes; }
+      #submitBtn {
+        grid-area: submit;
+        justify-self: center;
+        width: auto;
+        padding-inline: 60px;
+      }
+      #errorMsg { grid-column: 1 / -1; }
+    }
 
     .footer {
       text-align: center; margin-top: 20px; font-size: 0.78rem;
@@ -550,10 +691,6 @@
       לבת המצווה של ריקי
       <span class="ru">На бат-мицву Рики</span>
     </h1>
-    <span class="kids-only">
-      ילדים בלבד 🎈
-      <span class="ru">Только для детей</span>
-    </span>
   </div>
 
   <div class="cover-spacer"></div>
@@ -562,39 +699,64 @@
     4.9.2026 &nbsp;|&nbsp; אולם סינקו, רחובות
     <span class="ru">Зал «Синко», Реховот</span>
   </div>
-  <div class="cover-hint">✨</div>
+
+  <div class="cover-cta">
+    <button type="button" class="btn-cta" id="continueBtn" onclick="startSurprise()">
+      <span dir="auto">✦ המשך לפרטים ✦</span>
+    </button>
+    <div class="shh-text" id="shhText">
+      <img class="shh-img" src="photos/shhh.png" alt="ששש" />
+    </div>
+  </div>
 </div>
 
 <!-- ═══════════ שלב 2 — ההפתעה האמיתית ═══════════ -->
 <div id="stageReveal">
   <div class="reveal-inner">
     <div class="mega-title-wrap">
-      <div class="mega-title">חוגגים לטסיסים<br>50 שנות נישואים<br>בהפתעה! 🎉</div>
+      <div class="mega-title">
+        <span class="mega-tag">✦ הזמנה רשמית ✦</span>
+        <span class="mega-headline">חוגגים לטסיסים 50 שנות נישואים, בהפתעה!</span>
+      </div>
     </div>
 
     <div class="event-bar-wrap">
       <div class="event-bar">
-        <div class="event-item"><span class="event-label">יום</span><span class="event-value">יום שישי</span></div>
-        <div class="event-item"><span class="event-label">תאריך</span><span class="event-value">4.9.2026</span></div>
-        <div class="event-item"><span class="event-label">שעה</span><span class="event-value">12:30</span></div>
-        <div class="event-item"><span class="event-label">מיקום</span><span class="event-value">אולם סינקו, רחובות</span></div>
+        <div class="event-bar-inner">
+          <div class="event-item"><span class="event-label">יום</span><span class="event-value">יום שישי</span></div>
+          <div class="event-item"><span class="event-label">תאריך</span><span class="event-value">4.9.2026</span></div>
+          <div class="event-item"><span class="event-label">שעה</span><span class="event-value">12:30</span></div>
+          <div class="event-item"><span class="event-label">מיקום</span><span class="event-value">אולם סינקו, רחובות</span></div>
+        </div>
       </div>
     </div>
 
     <div class="bilingual-wrap">
       <div class="bilingual-split">
         <div class="bilingual-panel he">
-          <span class="panel-tag">✦ הזמנה ✦</span>
-          <span class="letter-title">משפחה וחברים יקרים,</span>
-          <p>אנחנו מזמינים אתכם להשתתף במסיבת חתונת ה-50 של ההורים שלנו. כמו שאתם מכירים אותם, החלטנו לא לספר להם מראש.</p>
-          <p>הם מוזמנים לבת המצווה של ריקי (האמיתית לגמרי!), ואתכם אנחנו מזמינים להגיע ולחגוג איתם בהפתעה גמורה. אנא שימרו על הסוד! ניפגש.</p>
+          <div class="panel-content">
+            <span class="panel-tag">✦ הזמנה ✦</span>
+            <span class="letter-title">משפחה וחברים יקרים,</span>
+            <p>אנחנו מזמינים אתכם להשתתף במסיבת חתונת ה-50 של ההורים שלנו. כמו שאתם מכירים אותם, החלטנו לא לספר להם מראש.</p>
+            <p>הם מוזמנים לבת המצווה של ריקי (האמיתית לגמרי!), ואתכם אנחנו מזמינים להגיע ולחגוג איתם בהפתעה גמורה. אנא שימרו על הסוד! ניפגש.</p>
+          </div>
         </div>
         <div class="bilingual-panel ru">
-          <span class="panel-tag">✦ ПРИГЛАШЕНИЕ ✦</span>
-          <span class="letter-title">Дорогие близкие и друзья,</span>
-          <p>Мы приглашаем вас принять участие в праздновании 50-летия свадьбы наших родителей. Как вы их знаете, мы решили не говорить им заранее.</p>
-          <p>Они приглашены на Бат-Мицву Рики (самую настоящую!), а вас мы приглашаем прийти и отпраздновать вместе с ними этот грандиозный сюрприз. Пожалуйста, сохраняйте это в секрете! До встречи.</p>
+          <div class="panel-content">
+            <span class="panel-tag">✦ ПРИГЛАШЕНИЕ ✦</span>
+            <span class="letter-title">Дорогие близкие и друзья,</span>
+            <p>Мы приглашаем вас принять участие в праздновании 50-летия свадьбы наших родителей. Как вы их знаете, мы решили не говорить им заранее.</p>
+            <p>Они приглашены на Бат-Мицву Рики (самую настоящую!), а вас мы приглашаем прийти и отпраздновать вместе с ними этот грандиозный сюрприз. Пожалуйста, сохраняйте это в секрете! До встречи.</p>
+          </div>
         </div>
+      </div>
+    </div>
+
+    <div class="cta-wrap">
+      <div class="cta-section">
+        <button type="button" class="btn-cta" onclick="scrollToForm()">
+          <span dir="auto">✦ אשר הגעה / Подтвердить ✦</span>
+        </button>
       </div>
     </div>
 
@@ -621,39 +783,49 @@
       <p class="sub-note">כדי לשמור על ההפתעה, אנא לא להזכיר את זה מול פולינה ומיכאל 🤫</p>
       <form id="form">
 
-        <div class="form-group">
-          <label>שם מלא <span class="ru">Полное имя</span> *</label>
+        <div class="form-group fg-name">
+          <label><span class="label-main">שם מלא *</span><span class="ru">Полное имя</span></label>
           <input type="text" id="name" placeholder="שם ושם משפחה" required />
         </div>
 
-        <div class="row">
+        <div class="form-group fg-attending">
+          <label><span class="label-main">מגיע/ה?</span><span class="ru">Придёте?</span></label>
+          <div class="toggle-group">
+            <button type="button" class="toggle active" data-value="כן" onclick="selectAttending(this)">כן</button>
+            <button type="button" class="toggle" data-value="לא" onclick="selectAttending(this)">לא</button>
+            <button type="button" class="toggle" data-value="אולי" onclick="selectAttending(this)">אולי</button>
+          </div>
+          <input type="hidden" id="attending" value="כן" />
+        </div>
+
+        <div class="row fg-counts">
           <div class="form-group">
-            <label>מגיע/ה? <span class="ru">Придёте?</span></label>
-            <div class="toggle-group">
-              <button type="button" class="toggle active" data-value="כן" onclick="selectAttending(this)">כן</button>
-              <button type="button" class="toggle" data-value="לא" onclick="selectAttending(this)">לא</button>
-              <button type="button" class="toggle" data-value="אולי" onclick="selectAttending(this)">אולי</button>
+            <label><span class="label-main">מבוגרים</span><span class="ru">Взрослые</span></label>
+            <div class="stepper" id="adultsStepperWrap">
+              <button type="button" class="step-btn" onclick="changeAdults(-1)">−</button>
+              <span class="step-val" id="adultsDisplay">1</span>
+              <button type="button" class="step-btn" onclick="changeAdults(1)">+</button>
             </div>
-            <input type="hidden" id="attending" value="כן" />
+            <input type="hidden" id="adults" value="1" />
           </div>
           <div class="form-group">
-            <label>מס' מגיעים <span class="ru">Кол-во</span></label>
-            <div class="stepper" id="stepperWrap">
-              <button type="button" class="step-btn" onclick="changeCount(-1)">−</button>
-              <span class="step-val" id="countDisplay">1</span>
-              <button type="button" class="step-btn" onclick="changeCount(1)">+</button>
+            <label><span class="label-main">ילדים</span><span class="ru">Дети</span></label>
+            <div class="stepper" id="childrenStepperWrap">
+              <button type="button" class="step-btn" onclick="changeChildren(-1)">−</button>
+              <span class="step-val" id="childrenDisplay">0</span>
+              <button type="button" class="step-btn" onclick="changeChildren(1)">+</button>
             </div>
-            <input type="hidden" id="count" value="1" />
+            <input type="hidden" id="children" value="0" />
           </div>
         </div>
 
-        <div class="form-group">
-          <label>טלפון <span class="ru">Телефон</span></label>
+        <div class="form-group fg-phone">
+          <label><span class="label-main">טלפון</span><span class="ru">Телефон</span></label>
           <input type="tel" id="phone" placeholder="050-0000000" />
         </div>
 
-        <div class="form-group">
-          <label>הערות <span class="ru">Комментарии</span></label>
+        <div class="form-group fg-notes">
+          <label><span class="label-main">הערות</span><span class="ru">Комментарии</span></label>
           <textarea id="notes" placeholder="רגישויות מזון, הערות..."></textarea>
         </div>
 
@@ -688,7 +860,7 @@
 </div>
 
 <script>
-  // ── מעבר אוטומטי מהכיסוי להפתעה אחרי 2 שניות ──
+  // ── לחיצה על "המשך לפרטים" -> מציגים "ששש..." ואז אחרי 2 שניות עוברים להפתעה ──
   const REVEAL_DELAY = 2000;
   let revealed = false;
 
@@ -699,9 +871,17 @@
     launchConfetti();
   }
 
-  setTimeout(reveal, REVEAL_DELAY);
-  // אפשר גם ללחוץ על המסך כדי לחשוף מיד
-  document.getElementById('stageCover').addEventListener('click', reveal);
+  function startSurprise() {
+    document.getElementById('continueBtn').style.display = 'none';
+    document.getElementById('shhText').classList.add('visible');
+    document.body.classList.add('surprise-starting');
+    setTimeout(reveal, REVEAL_DELAY);
+  }
+
+  // ── גלילה לטופס בלחיצה על "אשר את ההגעה" ──
+  function scrollToForm() {
+    document.getElementById('formCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 
   // ── גלריית תמונות: גריד + לייטבוקס עם דפדוף ──
   // להוסיף תמונות בעתיד: מוסיפים קובץ לתיקיית photos/ ומוסיפים את שם הקובץ לרשימה כאן.
@@ -787,25 +967,40 @@
     btn.classList.add('active');
     const val = btn.dataset.value;
     document.getElementById('attending').value = val;
-    const stepper = document.getElementById('stepperWrap');
+    const adultsWrap = document.getElementById('adultsStepperWrap');
+    const childrenWrap = document.getElementById('childrenStepperWrap');
     if (val === 'לא') {
-      stepper.classList.add('disabled');
-      document.getElementById('count').value = 0;
-      document.getElementById('countDisplay').textContent = '0';
+      adultsWrap.classList.add('disabled');
+      childrenWrap.classList.add('disabled');
+      document.getElementById('adults').value = 0;
+      document.getElementById('adultsDisplay').textContent = '0';
+      document.getElementById('children').value = 0;
+      document.getElementById('childrenDisplay').textContent = '0';
     } else {
-      stepper.classList.remove('disabled');
-      if (document.getElementById('count').value === '0') {
-        document.getElementById('count').value = 1;
-        document.getElementById('countDisplay').textContent = '1';
+      adultsWrap.classList.remove('disabled');
+      childrenWrap.classList.remove('disabled');
+      if (document.getElementById('adults').value === '0') {
+        document.getElementById('adults').value = 1;
+        document.getElementById('adultsDisplay').textContent = '1';
       }
     }
   }
 
-  function changeCount(delta) {
-    const input = document.getElementById('count');
-    const display = document.getElementById('countDisplay');
+  function changeAdults(delta) {
+    const input = document.getElementById('adults');
+    const display = document.getElementById('adultsDisplay');
     let val = parseInt(input.value) + delta;
     if (val < 1) val = 1;
+    if (val > 20) val = 20;
+    input.value = val;
+    display.textContent = val;
+  }
+
+  function changeChildren(delta) {
+    const input = document.getElementById('children');
+    const display = document.getElementById('childrenDisplay');
+    let val = parseInt(input.value) + delta;
+    if (val < 0) val = 0;
     if (val > 20) val = 20;
     input.value = val;
     display.textContent = val;
@@ -825,7 +1020,8 @@
     const data = {
       name:      document.getElementById('name').value.trim(),
       attending: document.getElementById('attending').value,
-      count:     document.getElementById('count').value,
+      adults:    document.getElementById('adults').value,
+      children:  document.getElementById('children').value,
       phone:     document.getElementById('phone').value.trim(),
       notes:     document.getElementById('notes').value.trim(),
     };
