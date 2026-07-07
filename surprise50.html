@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>בת מצווה של ריקי</title>
-  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;700;800&family=Frank+Ruhl+Libre:wght@300&family=Varela+Round&family=Nunito:wght@700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;700;800&family=Frank+Ruhl+Libre:wght@300&family=Varela+Round&family=Nunito:wght@700;800&family=Roboto+Condensed:wght@400;500;700&display=swap" rel="stylesheet" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; }
@@ -20,7 +20,7 @@
 
     .ru {
       display: block;
-      font-family: 'Assistant', sans-serif;
+      font-family: 'Roboto Condensed', sans-serif;
       font-weight: 300;
       opacity: 0.75;
       letter-spacing: 0;
@@ -315,6 +315,7 @@
       }
       .event-item:nth-child(4) { border-top: 1px solid rgba(255,255,255,0.12); }
       .bilingual-split { flex-direction: column; }
+      .bilingual-panel.ru { order: -1; }
     }
     .bilingual-panel {
       flex: 1;
@@ -361,11 +362,10 @@
     }
     .bilingual-panel p:last-child { margin-bottom: 0; }
     .bilingual-panel.he { background: #3a2440; color: #fff; direction: rtl; text-align: right; }
-    .bilingual-panel.ru { background: #241730; color: rgba(255,255,255,0.85); direction: ltr; text-align: left; }
-    /* הטקסט הרוסי נראה גדול/כבד יותר מהעברי באותו גודל - מקטינים טיפה ומשתמשים
-       במשקל דק (Assistant Light) כדי לאזן ויזואלית בין השפות */
-    .bilingual-panel.ru p { font-size: 1rem; font-weight: 300; }
-    .bilingual-panel.ru .letter-title { font-size: 1.05rem; }
+    .bilingual-panel.ru { background: #241730; color: #fff; direction: ltr; text-align: left; font-family: 'Roboto Condensed', sans-serif; }
+    .bilingual-panel.ru p { font-size: 1.1rem; font-weight: 400; }
+    .bilingual-panel.ru .letter-title { font-size: 1.15rem; font-family: 'Roboto Condensed', sans-serif; }
+    .bilingual-panel.ru .panel-tag { font-family: 'Roboto Condensed', sans-serif; }
 
     /* כפתור "אשר את ההגעה" - גולל לטופס */
     .cta-wrap { width: 100%; direction: ltr; }
@@ -726,7 +726,7 @@
 
   <div class="cover-cta">
     <button type="button" class="btn-cta" id="continueBtn" onclick="startSurprise()">
-      <span dir="auto">✦ המשך לפרטים ✦</span>
+      <span dir="auto">✦ לחץ לפרטים! ✦</span>
     </button>
     <div class="shh-text" id="shhText">
       <img class="shh-img" src="photos/shhh.png" alt="ששש" />
