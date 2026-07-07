@@ -20,6 +20,7 @@
 
     .ru {
       display: block;
+      direction: ltr;
       font-family: 'Roboto Condensed', sans-serif;
       font-weight: 300;
       opacity: 0.75;
@@ -284,13 +285,13 @@
     .event-label {
       display: block;
       font-size: 0.78rem;
-      color: #d4af37;
+      color: #fff;
       margin-bottom: 6px;
     }
     .event-value {
       display: block;
       font-weight: 700;
-      color: #fff;
+      color: #D6B13D;
       font-size: 1.4rem;
     }
 
@@ -403,6 +404,41 @@
       text-align: center;
       white-space: nowrap;
     }
+
+    /* יצירת קשר - סקשן מלא רוחב */
+    .contact-wrap { width: 100%; direction: ltr; margin: 16px 0 0; }
+    .contact-section {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      margin-left: -50vw;
+      background: #2A1A2E;
+      text-align: center;
+      padding: 26px 18px;
+      direction: rtl;
+    }
+    .contact-text {
+      font-size: 1rem;
+      color: #f0e6cc;
+      margin-bottom: 14px;
+    }
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: 30px;
+      background: #25D366;
+      color: #fff;
+      text-decoration: none;
+      font-family: 'Assistant', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      direction: ltr;
+      transition: opacity 0.2s;
+    }
+    .whatsapp-btn:hover { opacity: 0.9; }
+    .whatsapp-btn svg { width: 20px; height: 20px; fill: #fff; }
 
     .secret-box {
       margin: 16px 0 6px;
@@ -540,9 +576,19 @@
       width: 100%;
       padding: 18px 16px;
     }
-    .card h2 { font-size: 1.35rem; font-weight: 700; color: #fff; margin-bottom: 2px; text-align: center; }
-    .card h2 .ru { font-size: 0.78rem; font-weight: 400; margin-top: 2px; }
-    .card .sub-note { text-align: center; font-size: 0.8rem; color: rgba(255,255,255,0.65); margin-bottom: 14px; }
+    .card h2 {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+    .card h2 .ru { font-size: 1.35rem; font-weight: 700; margin-top: 0; }
+    .card .sub-note { text-align: center; font-size: 0.95rem; color: rgba(255,255,255,0.65); margin-bottom: 14px; }
+    .card .sub-note .ru { font-size: 0.8rem; margin-top: 3px; }
 
     .form-group { margin-bottom: 10px; }
     label {
@@ -550,22 +596,22 @@
       justify-content: space-between;
       align-items: baseline;
       gap: 8px;
-      font-weight: 600;
+      font-weight: 700;
       margin-bottom: 4px;
-      font-size: 0.8rem;
-      color: rgba(240,230,204,0.55);
+      font-size: 0.95rem;
+      color: #FFD700;
       transition: color 0.2s;
     }
     .form-group:focus-within label,
-    .row .form-group:focus-within label { color: #f0e6cc; }
-    label .ru { font-weight: 400; font-size: 0.72rem; opacity: 0.85; }
+    .row .form-group:focus-within label { color: #FFEB3B; }
+    label .ru { font-weight: 400; font-size: 0.78rem; opacity: 0.85; }
 
     input, select, textarea {
       width: 100%;
       padding: 9px 12px;
       border: 1px solid rgba(255,255,255,0.5);
-      border-radius: 10px;
-      font-size: 0.92rem;
+      border-radius: 5px;
+      font-size: 1.05rem;
       font-family: inherit;
       color: #1a1a2e;
       background: #E3D3D6;
@@ -579,35 +625,67 @@
     }
     textarea { resize: vertical; min-height: 52px; }
 
-    .row { display: flex; gap: 8px; align-items: flex-end; }
+    .row { display: flex; gap: 10px; align-items: flex-end; }
     .row .form-group { flex: 1; }
 
     .stepper {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       background: #E3D3D6;
       border: 1px solid rgba(255,255,255,0.5);
       border-radius: 10px;
-      overflow: hidden;
+      padding: 0 5px;
       height: 42px;
     }
     .stepper.disabled { opacity: 0.4; pointer-events: none; }
     .step-btn {
-      background: none; border: none; font-size: 1.3rem; padding: 9px 16px;
-      cursor: pointer; color: #1a1a2e; font-family: 'Assistant', sans-serif;
-      transition: background 0.15s;
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #D9B442;
+      border: none;
+      font-size: 1.4rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #1a1a2e;
+      font-family: 'Assistant', sans-serif;
+      transition: background 0.15s, transform 0.1s;
     }
-    .step-btn:hover { background: rgba(0,0,0,0.08); }
+    .step-btn:hover { background: #c7a53a; }
+    .step-btn:active { transform: scale(0.92); }
     .step-val { flex: 1; text-align: center; font-size: 1rem; font-weight: 600; color: #1a1a2e; }
 
-    .toggle-group { display: flex; gap: 6px; height: 42px; }
+    .toggle-group { display: flex; gap: 10px; height: 42px; }
     .toggle {
+      position: relative;
       flex: 1; padding: 9px 12px; border: 1px solid rgba(255,255,255,0.5);
       border-radius: 10px; background: #E3D3D6; color: #1a1a2e;
       font-family: 'Assistant', sans-serif; font-size: 0.92rem; cursor: pointer;
       transition: all 0.2s;
     }
     .toggle.active { background: rgba(255,255,255,0.9); color: #1a1a2e; border-color: white; font-weight: 600; }
+    .toggle.active::after {
+      content: '✓';
+      position: absolute;
+      top: -7px;
+      inset-inline-end: -7px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #2ecc71;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.35);
+    }
 
     .btn {
       width: 100%;
@@ -807,7 +885,10 @@
         אשרו את הגעתכם
         <span class="ru">Подтвердите присутствие</span>
       </h2>
-      <p class="sub-note">כדי לשמור על ההפתעה, אנא לא להזכיר את זה מול פולינה ומיכאל</p>
+      <p class="sub-note">
+        כדי לשמור על ההפתעה, אנא אל תזכירו זאת ליד פולינה ומישה!
+        <span class="ru">Чтобы сохранить сюрприз, пожалуйста, ни слова при Полине и Мише!</span>
+      </p>
       <form id="form">
 
         <div class="form-group fg-name">
@@ -864,6 +945,20 @@
         <div class="msg error" id="errorMsg">שגיאה בשליחה. נסה שוב.</div>
 
       </form>
+    </div>
+
+    <!-- יצירת קשר -->
+    <div class="contact-wrap">
+      <div class="contact-section">
+        <p class="contact-text">לכל שאלה צרו קשר עם אינה: 054-4923904</p>
+        <a class="whatsapp-btn" href="https://wa.me/972544923904" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M17.47 14.38c-.29-.14-1.7-.84-1.97-.93-.26-.1-.46-.14-.65.14-.2.29-.75.93-.92 1.12-.17.2-.34.22-.63.08-.29-.15-1.22-.45-2.33-1.44-.86-.77-1.44-1.71-1.61-2-.17-.29-.02-.45.13-.6.13-.13.29-.34.43-.51.15-.17.2-.29.29-.48.1-.2.05-.36-.02-.5-.08-.15-.65-1.58-.9-2.16-.24-.58-.48-.5-.65-.5-.17-.01-.36-.01-.56-.01a1.08 1.08 0 0 0-.78.36c-.27.29-1.02 1-1.02 2.44s1.05 2.83 1.2 3.03c.15.2 2.06 3.15 5 4.42.7.3 1.25.48 1.67.61.7.22 1.34.19 1.84.12.56-.08 1.7-.7 1.94-1.37.24-.68.24-1.26.17-1.38-.07-.13-.26-.2-.55-.34z"/>
+            <path d="M12.02 2C6.5 2 2.02 6.48 2.02 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.33A9.94 9.94 0 0 0 12.02 22C17.55 22 22 17.52 22 12S17.55 2 12.02 2zm0 18.15c-1.66 0-3.2-.46-4.52-1.26l-.32-.19-3.01.79.8-2.93-.21-.3A8.15 8.15 0 0 1 3.85 12c0-4.5 3.66-8.15 8.17-8.15 4.5 0 8.16 3.65 8.16 8.15 0 4.5-3.66 8.15-8.16 8.15z"/>
+          </svg>
+          054-4923904
+        </a>
+      </div>
     </div>
 
     <!-- מסך תודה -->
